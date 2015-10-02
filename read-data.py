@@ -43,7 +43,7 @@ def chksum_nmea(sentence):
 
 ser = None
 try:
-	ser = serial.Serial('/dev/ttyUSB0', 9600) # Establish the connection on a specific port
+	ser = serial.Serial('/dev/ttyUSB0', 9600, timeout=1) # Establish the connection on a specific port
 	#ser.open()
 
 	linea=''
@@ -98,8 +98,8 @@ try:
 		   		if serial_data != '\n':
 					linea=linea+serial_data
 			
-		except serial.serialutil.SerialException:
-			#print "error"
+		except serial.serialutil.SerialException as se:
+			# print se
 			pass
 except Exception as e:
 	print e
