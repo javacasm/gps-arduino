@@ -63,7 +63,10 @@ try:
 						time,lat, a, lon,b,calidad,nSat,diHor,height,unidHeight = linea.strip().split(',')[1:11]		   			
 						flat=float(lat)/100.0
 						flon=float(lon)/100.0
-						mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+height+meter+" "+  linea
+						if b == 'W':
+							flat=-flat
+						fheight=float(height)
+						mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+height+unidHeight+" "+  linea
 
 					else:	
 						mensaje = "OK "+ linea
