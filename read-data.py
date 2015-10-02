@@ -80,7 +80,7 @@ try:
 							mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+  linea							
 						else:
 							if IsGPRMC:
-								time,c,lat,a,lon,b,time,d,_,date = linea.strip().split(',')[1:10]
+								time,c,lat,a,lon,b,d,_,date = linea.strip().split(',')[1:10]
 								flat=float(lat)/100.0
 								flon=float(lon)/100.0
 								if b == 'W':
