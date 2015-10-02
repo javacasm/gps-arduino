@@ -16,7 +16,7 @@ try:
 		   	if serial_data == '\n':
 		   		if chksum_nmea(linea):
 		   			linea=linea+" OK"
-		   		else
+		   		else:
 		   			linea=linea+" ERROR"
 		   		print linea
 		   		linea=''
