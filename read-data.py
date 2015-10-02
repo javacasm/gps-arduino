@@ -51,11 +51,18 @@ try:
 		   	serial_data = ser.read()
 		   	if serial_data == '\r' :
 		   		checksum = chksum_nmea(linea)
+		   		mensaje=None
 		   		if checksum:
-		   			linea="OK "+ linea
+		   		# http://raspberrypi.stackexchange.com/questions/12029/extracting-required-information-from-nmea-gps-data
+				# Extract the data from GPGGA sentence
+					if linea.startswith( '$GPGGA' ) :
+        				lat, _, lon = line.strip().split(',')[2:5]		   			
+        				mensaje = ">>> ""+ lat+" , "+lon+  linea
+        			else:	
+		   				mensaje = "OK "+ linea
 		   		else:
-		   			linea="ERROR "+ linea
-		   		print linea
+		   			mensaje = "ERROR "+ linea
+		   		print mensaje
 		   		linea=''
 		   	else:		
 		   		if serial_data != '\n':
