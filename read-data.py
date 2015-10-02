@@ -58,9 +58,11 @@ try:
 					lat=None
 					lon=None
 					IsGPGGA=linea.startswith( '$GPGGA' )
+					IsGPGLL=linea.startswith( '$GPGLL' )
+					IsGPRMC=linea.startswith( '$GPRMC' )
 					if IsGPGGA:
-						print linea
-						time,lat, a, lon,b,calidad,nSat,diHor,height,unidHeight = linea.strip().split(',')[1:11]		   			
+						#print linea
+						time,lat, a, lon,b,calidad,nSat,diHor,height,unidHeight = linea.strip().split(',')[1:11]
 						flat=float(lat)/100.0
 						flon=float(lon)/100.0
 						if b == 'W':
@@ -69,7 +71,23 @@ try:
 						mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+height+unidHeight+" "+  linea
 
 					else:	
-						mensaje = "OK "+ linea
+						if IsGPGLL:
+							lat,a,lon,b,time,c,d = linea.strip().split(',')[1:8]
+							flat=float(lat)/100.0
+							flon=float(lon)/100.0
+							if b == 'W':
+								flon=-flon
+							mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+  linea							
+						else:
+							if IsGPRMC:
+								time,c,lat,a,lon,b,time,d,_,date = linea.strip().split(',')[1:10]
+								flat=float(lat)/100.0
+								flon=float(lon)/100.0
+								if b == 'W':
+									flon=-flon
+								mensaje = ">>> ["+time+" "+date+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+  linea							
+							else:
+								mensaje = "OK "+ linea
 		   		else:
 		   			mensaje = "ERROR "+ linea
 		   		print mensaje
