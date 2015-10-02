@@ -3,6 +3,7 @@
 
 from time import sleep
 import serial
+import re
 
 # Calculate checksums 
 # http://doschman.blogspot.com.es/2013/01/calculating-nmea-sentence-checksums.html
@@ -11,8 +12,6 @@ def chksum_nmea(sentence):
 	
     # This is a string, will need to convert it to hex for 
     # proper comparsion below
-    print sentence
-    
 
     cksum = sentence[len(sentence) - 2:]
     
@@ -20,10 +19,8 @@ def chksum_nmea(sentence):
     # between '$' and '*' and nukes any lingering
     # newline or CRLF
 
-    print cksum
-
     chksumdata = re.sub("(\n|\r\n)","", sentence[sentence.find("$")+1:sentence.find("*")])
-    print chksumdata    
+
     # Initializing our first XOR value
     csum = 0 
     
@@ -68,7 +65,7 @@ try:
 			#print "error"
 			pass
 except Exception as e:
-	print e.Message
+	print e
 finally:
     if ser:
         ser.close()
