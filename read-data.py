@@ -64,7 +64,7 @@ try:
 						flat=float(lat)/100.0
 						flon=float(lon)/100.0
 						if b == 'W':
-							flat=-flat
+							flon=-flon
 						fheight=float(height)
 						mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+height+unidHeight+" "+  linea
 
