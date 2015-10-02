@@ -59,8 +59,12 @@ try:
 					lon=None
 					IsGPGGA=linea.startswith( '$GPGGA' )
 					if IsGPGGA:
-						lat, _, lon = linea.strip().split(',')[2:5]		   			
-						mensaje = ">>> ("+ lat+" , "+lon+") "+  linea
+						print linea
+						time,lat, a, lon,b,calidad,nSat,diHor,height,unidHeight = linea.strip().split(',')[1:11]		   			
+						flat=float(lat)/100.0
+						flon=float(lon)/100.0
+						mensaje = ">>> ["+time+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+height+meter+" "+  linea
+
 					else:	
 						mensaje = "OK "+ linea
 		   		else:
