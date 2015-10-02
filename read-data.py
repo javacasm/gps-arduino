@@ -2,5 +2,12 @@
 from time import sleep
 import serial
 ser = serial.Serial('/dev/ttyUSB1', 9600) # Establish the connection on a specific port
+#ser.open()
+
 while True:
-     print ser.readline() # Read the newest output from the Arduino
+	try:
+	   	serial_data = ser.readline()
+		print "["+serial_data+"]"
+	except serial.serialutil.SerialException:
+		#print "error"
+		pass
