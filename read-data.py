@@ -6,8 +6,8 @@ ser = serial.Serial('/dev/ttyUSB1', 9600) # Establish the connection on a specif
 
 while True:
 	try:
-	   	serial_data = ser.readline()
-		print "["+serial_data+"]"
+	   	serial_data = ser.read()
+		print serial_data
 	except serial.serialutil.SerialException:
 		#print "error"
 		pass
