@@ -4,6 +4,7 @@
 from time import sleep
 import serial
 import re
+import datetime
 
 # Calculate checksums 
 # http://doschman.blogspot.com.es/2013/01/calculating-nmea-sentence-checksums.html
@@ -85,7 +86,8 @@ try:
 								flon=float(lon)/100.0
 								if b == 'W':
 									flon=-flon
-								mensaje = ">>> ["+time+" "+date+"] ("+ str(flat)+a+" , "+str(flon)+b+") "+  linea							
+								dt=datetime.datetime.strptime(date+" "+time,"%d%m%y %H%M%S.%f")
+								mensaje = ">>> ["+time+" "+date+"("+str(dt)+") ] ("+ str(flat)+a+" , "+str(flon)+b+") "+  linea							
 							else:
 								mensaje = "OK "+ linea
 		   		else:
