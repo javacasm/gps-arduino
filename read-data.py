@@ -3,6 +3,8 @@
 
 from time import sleep
 import serial
+
+ser = None
 try:
 	ser = serial.Serial('/dev/ttyUSB1', 9600) # Establish the connection on a specific port
 	#ser.open()
