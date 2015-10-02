@@ -14,7 +14,7 @@ try:
 		try:
 		   	serial_data = ser.read()
 		   	if serial_data == '\n':
-		   		if chksum_nmealinea):
+		   		if chksum_nmea(linea):
 		   			linea=linea+" OK"
 		   		else
 		   			linea=linea+" ERROR"
