@@ -55,11 +55,14 @@ try:
 		   		if checksum:
 		   		# http://raspberrypi.stackexchange.com/questions/12029/extracting-required-information-from-nmea-gps-data
 				# Extract the data from GPGGA sentence
-					if linea.startswith( '$GPGGA' ) :
-        				lat, _, lon = line.strip().split(',')[2:5]		   			
-        				mensaje = ">>> ""+ lat+" , "+lon+  linea
-        			else:	
-		   				mensaje = "OK "+ linea
+					lat=None
+					lon=None
+					IsGPGGA=linea.startswith( '$GPGGA' )
+					if IsGPGGA:
+						lat, _, lon = linea.strip().split(',')[2:5]		   			
+						mensaje = ">>> ("+ lat+" , "+lon+") "+  linea
+					else:	
+						mensaje = "OK "+ linea
 		   		else:
 		   			mensaje = "ERROR "+ linea
 		   		print mensaje
